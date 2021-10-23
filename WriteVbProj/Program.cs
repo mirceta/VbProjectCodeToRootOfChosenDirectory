@@ -7,7 +7,6 @@ namespace WriteVbProj
 {
     class Program
     {
-
         /*
          Write all found .bas and .frm files from vbSourceDirectory recursively to the root of
          a destination folder. 
@@ -18,13 +17,13 @@ namespace WriteVbProj
         static string DestinationDirectory = @"C:\Users\km\Desktop\playground\prgvscode";
 
         static void Main(string[] args) {
-            var x = new string[] { ".bas", ".frm" };
+            var x = new string[] { ".bas", ".frm", ".ctl" };
             List<string> acc = new List<string>();
             GetAllPathsToFilesRecurse(ref acc, VbSourceDirectory, x);
 
             acc.ForEach(x => {
                 string text = File.ReadAllText(x);
-                File.WriteAllText(Path.Combine(DestinationDirectory, Path.GetFileName(x)), text);
+                File.WriteAllText(Path.Combine(DestinationDirectory, Path.GetFileNameWithoutExtension(x) + ".vb"), text);
             });
         }
 
